@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brent De Petter — Triatleet & Hardloper</title>
+<title>Brent De Petter — Triatleet &amp; Hardloper</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F2F5FA;
+  --bg:#EEF2F9;
   --white:#FFFFFF;
   --navy:#0C1730;
+  --navy2:#182E5C;
   --blue:#2257D4;
-  --border:#DDE2EE;
+  --blue-lt:#3B6FE8;
+  --border:#DDE3EE;
   --text:#0C1730;
   --muted:#64748B;
   --swim:#0284C7;
@@ -22,141 +24,301 @@
   --tri-run:#DC2626;
   --running:#16803D;
   --gold:#92600E;
-  --r:10px;
-  --sh: 0 1px 3px rgba(12,23,48,.06), 0 1px 2px rgba(12,23,48,.04);
-  --sh-hover: 0 4px 14px rgba(12,23,48,.10), 0 1px 4px rgba(12,23,48,.06);
+  /* Belgian flag */
+  --be-black:#1C1C1C;
+  --be-yellow:#FDCF00;
+  --be-red:#EF3340;
+  --r:12px;
+  --sh:0 1px 4px rgba(12,23,48,.06),0 2px 10px rgba(12,23,48,.05);
+  --sh-md:0 4px 18px rgba(12,23,48,.10),0 1px 5px rgba(12,23,48,.05);
+  --sh-lg:0 8px 28px rgba(12,23,48,.14),0 2px 8px rgba(12,23,48,.06);
 }
+
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 
-/* NAV */
-nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:58px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
-.nav-brand{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--navy);text-decoration:none}
+/* ── BELGIAN FLAG TOP STRIPE ── */
+.be-topbar{display:flex;height:4px;position:fixed;top:0;left:0;right:0;z-index:300}
+.be-topbar span{flex:1}
+
+/* ── NAV ── */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:56px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:4px;z-index:200;
+}
+.nav-brand{
+  font-family:'Barlow Semi Condensed',sans-serif;
+  font-size:1.05rem;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--navy);text-decoration:none;
+}
 .nav-brand em{color:var(--blue);font-style:normal}
-.nav-links{list-style:none;display:flex;gap:2rem}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.83rem;font-weight:500;letter-spacing:.02em;transition:color .15s}
-.nav-links a:hover{color:var(--navy)}
+.nav-links{list-style:none;display:flex;gap:1.75rem}
+.nav-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:.82rem;font-weight:500;letter-spacing:.02em;
+  padding-bottom:2px;border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;
+}
+.nav-links a:hover{color:var(--navy);border-bottom-color:var(--blue)}
 
-/* HERO */
-.hero{background:var(--white);border-bottom:1px solid var(--border);padding:4.5rem 2.5rem 3.5rem}
-.hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:end}
-.hero-label{font-size:.67rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem}
-.hero h1{font-family:'Barlow Semi Condensed',sans-serif;font-size:clamp(3.5rem,6vw,5.5rem);font-weight:700;line-height:.95;text-transform:uppercase;letter-spacing:.02em;color:var(--navy);margin-bottom:1.1rem}
-.hero-sub{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
-.discs{display:flex;align-items:center;gap:.625rem;flex-wrap:wrap}
-.disc{display:inline-flex;align-items:center;gap:.375rem;font-size:.73rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.275rem .65rem;border-radius:100px;border:1.5px solid}
-.disc.sw{border-color:rgba(2,132,199,.25);color:var(--swim);background:rgba(2,132,199,.05)}
-.disc.bk{border-color:rgba(194,119,10,.25);color:var(--bike);background:rgba(194,119,10,.05)}
-.disc.rn{border-color:rgba(220,38,38,.25);color:var(--tri-run);background:rgba(220,38,38,.05)}
-.disc.go{border-color:rgba(22,128,61,.25);color:var(--running);background:rgba(22,128,61,.05)}
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(140deg, #0C1730 0%, #162952 45%, #0e2248 100%);
+  padding:5.5rem 2.5rem 4.5rem;
+  position:relative;overflow:hidden;
+}
+/* Soft radial glows */
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 80% at 10% 65%, rgba(34,87,212,.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 90% 5%,  rgba(253,207,0,.05) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 88% 95%, rgba(239,51,64,.05) 0%, transparent 55%);
+}
+/* Subtle dot-grid texture */
+.hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size:28px 28px;
+}
+.hero-inner{
+  max-width:1080px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:end;
+  position:relative;z-index:1;
+}
+
+/* Hero text */
+.hero-eyebrow{
+  display:flex;align-items:center;gap:.55rem;
+  font-size:.64rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.45);
+  margin-bottom:.75rem;
+}
+/* Mini Belgian flag */
+.be-flag-mini{
+  display:inline-flex;width:16px;height:11px;
+  border-radius:2px;overflow:hidden;
+  box-shadow:0 1px 4px rgba(0,0,0,.4);flex-shrink:0;
+}
+.be-flag-mini span{flex:1;display:block}
+
+.hero h1{
+  font-family:'Barlow Semi Condensed',sans-serif;
+  font-size:clamp(3.8rem,6.5vw,6.25rem);
+  font-weight:800;line-height:.9;
+  text-transform:uppercase;letter-spacing:.025em;
+  color:#fff;margin-bottom:1.375rem;
+  text-shadow:0 2px 24px rgba(0,0,0,.25);
+}
+.hero-sub{color:rgba(255,255,255,.38);font-size:.87rem;margin-bottom:1.75rem;letter-spacing:.01em}
+.discs{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+.disc{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  padding:.28rem .65rem;border-radius:100px;border:1.5px solid;
+}
+.disc.sw{border-color:rgba(125,211,252,.25);color:#93DEFF;background:rgba(2,132,199,.12)}
+.disc.bk{border-color:rgba(253,186,116,.25);color:#FCA54B;background:rgba(194,119,10,.1)}
+.disc.rn{border-color:rgba(252,165,165,.25);color:#FCA5A5;background:rgba(220,38,38,.1)}
+.disc.go{border-color:rgba(134,239,172,.25);color:#86EFAC;background:rgba(22,128,61,.1)}
 .disc-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
-.pr-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem 1.875rem;text-align:center;min-width:165px;flex-shrink:0}
-.pr-lbl{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:.35rem}
-.pr-val{font-family:'Barlow Semi Condensed',sans-serif;font-size:2.75rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
-.pr-sub{font-size:.73rem;color:var(--muted);margin-top:.35rem}
 
-/* STATS BAR */
-.sbar{background:var(--white);border-bottom:1px solid var(--border)}
-.sbar-in{max-width:1080px;margin:0 auto;padding:1.125rem 2.5rem;display:grid;grid-template-columns:repeat(4,1fr)}
+/* PR sidebar */
+.pr-sidebar{display:flex;flex-direction:column;gap:.6rem;flex-shrink:0}
+.pr-box{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r);
+  padding:1.25rem 1.625rem;
+  min-width:158px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:background .2s,border-color .2s,transform .2s;
+  position:relative;overflow:hidden;
+}
+.pr-box::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 60%);
+  pointer-events:none;
+}
+.pr-box:hover{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.18);transform:translateY(-2px)}
+.pr-lbl{font-size:.58rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.4);margin-bottom:.25rem}
+.pr-val{font-family:'Barlow Semi Condensed',sans-serif;font-size:2.375rem;font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.pr-sub{font-size:.68rem;color:rgba(255,255,255,.3);margin-top:.2rem}
+
+/* ── STATS BAR ── */
+.sbar{background:var(--white);border-bottom:1px solid var(--border);box-shadow:var(--sh)}
+.sbar-in{
+  max-width:1080px;margin:0 auto;
+  padding:1.25rem 2.5rem;
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
 .sbi{text-align:center;padding:.375rem 1rem;border-right:1px solid var(--border)}
 .sbi:last-child{border-right:none}
-.sbi-n{font-family:'Barlow Semi Condensed',sans-serif;font-size:2rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
-.sbi-l{font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.2rem}
+.sbi-n{
+  font-family:'Barlow Semi Condensed',sans-serif;
+  font-size:2.1rem;font-weight:700;line-height:1;
+  color:var(--navy);font-variant-numeric:tabular-nums;
+}
+.sbi-l{font-size:.62rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:.2rem}
 
-/* WRAP + SECTIONS */
+/* ── LAYOUT ── */
 .wrap{max-width:1080px;margin:0 auto;padding:0 2.5rem}
-.sec{padding:3.25rem 0}
-.sec-top{margin-bottom:1.5rem}
-.sec-eye{font-size:.63rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:.3rem}
-.sec-h2{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.45rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--navy)}
+.sec{padding:3.5rem 0}
+.sec-top{margin-bottom:1.75rem}
+.sec-eye{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:.3rem}
+.sec-h2{
+  font-family:'Barlow Semi Condensed',sans-serif;
+  font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--navy);
+}
 .divider{border:none;border-top:1px solid var(--border);margin:0}
 
-/* UPCOMING */
-.up-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.875rem}
-.up-card{background:var(--white);border:1px solid var(--border);border-top-width:3px;border-radius:var(--r);padding:1.375rem 1.5rem;box-shadow:var(--sh);transition:box-shadow .2s,transform .2s}
-.up-card:hover{box-shadow:var(--sh-hover);transform:translateY(-2px)}
+/* ── UPCOMING CARDS ── */
+.up-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.up-card{
+  background:var(--white);
+  border:1px solid var(--border);border-top-width:3px;
+  border-radius:var(--r);padding:1.5rem 1.625rem;
+  box-shadow:var(--sh);
+  transition:box-shadow .22s,transform .22s cubic-bezier(.4,0,.2,1);
+}
+.up-card:hover{box-shadow:var(--sh-lg);transform:translateY(-3px)}
 .up-card.t{border-top-color:var(--blue)}
 .up-card.r{border-top-color:var(--running)}
-.up-day{font-family:'Barlow Semi Condensed',sans-serif;font-size:2.25rem;font-weight:700;line-height:1;color:var(--navy)}
-.up-mo{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.875rem}
-.up-nm{font-family:'Barlow Semi Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--navy);margin-bottom:.2rem}
-.up-loc{font-size:.82rem;color:var(--muted);margin-bottom:.875rem}
+.up-day{
+  font-family:'Barlow Semi Condensed',sans-serif;
+  font-size:2.5rem;font-weight:700;line-height:1;color:var(--navy);
+}
+.up-mo{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:1rem}
+.up-nm{
+  font-family:'Barlow Semi Condensed',sans-serif;
+  font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  color:var(--navy);margin-bottom:.2rem;
+}
+.up-loc{font-size:.81rem;color:var(--muted);margin-bottom:.875rem}
 .up-badges{display:flex;gap:.3rem;flex-wrap:wrap}
 
-/* BADGES */
-.b{display:inline-flex;align-items:center;padding:.2rem .5rem;border-radius:4px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
-.b-sprint{background:rgba(2,132,199,.1);color:#0369A1}
+/* ── BADGES ── */
+.b{
+  display:inline-flex;align-items:center;
+  padding:.2rem .55rem;border-radius:4px;
+  font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
+}
 .b-olympic{background:rgba(34,87,212,.1);color:#1D4ED8}
 .b-703{background:rgba(124,58,237,.1);color:#6D28D9}
 .b-full{background:rgba(220,38,38,.1);color:#B91C1C}
 .b-tri{background:rgba(34,87,212,.1);color:#1D4ED8}
-.b-run{background:rgba(22,128,61,.1);color:#15803D}
-.b-5k,.b-10k,.b-half,.b-mara,.b-miles{background:rgba(22,128,61,.08);color:#15803D}
-.b-gold{background:rgba(161,121,0,.12);color:var(--gold)}
-.b-top10{background:rgba(34,87,212,.1);color:#1D4ED8}
+.b-run,.b-5k,.b-10k,.b-half,.b-mara,.b-miles{background:rgba(22,128,61,.08);color:#15803D}
+.b-gold{
+  background:rgba(146,96,14,.1);color:var(--gold);
+  border:1px solid rgba(146,96,14,.18);
+}
+.b-top10{background:rgba(34,87,212,.08);color:#1D4ED8}
 .b-fin{background:rgba(100,116,139,.1);color:var(--muted)}
 
-/* RESULT CARDS */
-.results{display:flex;flex-direction:column;gap:.75rem}
-.rcard{background:var(--white);border:1px solid var(--border);border-left-width:3px;border-radius:var(--r);padding:1.375rem 1.5rem;box-shadow:var(--sh);transition:box-shadow .15s}
-.rcard:hover{box-shadow:var(--sh-hover)}
+/* ── RESULT CARDS ── */
+.results{display:flex;flex-direction:column;gap:.875rem}
+.rcard{
+  background:var(--white);
+  border:1px solid var(--border);border-left-width:3px;
+  border-radius:var(--r);padding:1.5rem 1.625rem;
+  box-shadow:var(--sh);
+  transition:box-shadow .2s,transform .2s cubic-bezier(.4,0,.2,1);
+}
+.rcard:hover{box-shadow:var(--sh-md);transform:translateX(3px)}
 .rcard.t{border-left-color:var(--blue)}
 .rcard.r{border-left-color:var(--running)}
 
-.rc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1.25rem;margin-bottom:.875rem}
-.rc-badges{display:flex;gap:.3rem;margin-bottom:.45rem;flex-wrap:wrap}
-.rc-nm{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);margin-bottom:.25rem}
-.rc-meta{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.375rem;flex-wrap:wrap}
+.rc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1.25rem;margin-bottom:1rem}
+.rc-badges{display:flex;gap:.3rem;margin-bottom:.5rem;flex-wrap:wrap}
+.rc-nm{
+  font-family:'Barlow Semi Condensed',sans-serif;
+  font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  color:var(--navy);margin-bottom:.25rem;
+}
+.rc-meta{font-size:.79rem;color:var(--muted);display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
 .meta-dot{width:3px;height:3px;background:var(--border);border-radius:50%;flex-shrink:0}
 .rc-res{text-align:right;flex-shrink:0}
-.rc-pos{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.75rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
+.rc-pos{
+  font-family:'Barlow Semi Condensed',sans-serif;
+  font-size:2.25rem;font-weight:700;line-height:1;
+  color:var(--navy);font-variant-numeric:tabular-nums;
+}
 .rc-pos.g{color:var(--gold)}
-.rc-time{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;margin-top:.1rem}
+.rc-time{font-size:.79rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;margin-top:.1rem}
 
-/* SPLITS TAPE (triathlon) */
+/* ── SPLIT TAPE ── */
 .tape{margin-bottom:.875rem}
-.tape-bar{display:flex;height:4px;border-radius:2px;overflow:hidden;gap:2px;margin-bottom:.55rem}
+.tape-bar{display:flex;height:5px;border-radius:3px;overflow:hidden;gap:2px;margin-bottom:.65rem}
 .ts{background:var(--swim)}
 .tt{background:var(--border)}
 .tb{background:var(--bike)}
 .tr{background:var(--tri-run)}
-.splits{display:flex;gap:1.25rem;flex-wrap:wrap}
+.splits{display:flex;gap:1.5rem;flex-wrap:wrap}
 .sp{display:flex;flex-direction:column}
-.sp-l{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
-.sp-v{font-family:'Barlow Semi Condensed',sans-serif;font-size:.95rem;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+.sp-l{font-size:.58rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.sp-v{font-family:'Barlow Semi Condensed',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
 .sp.sw .sp-l{color:var(--swim)}
 .sp.bk .sp-l{color:var(--bike)}
 .sp.rn .sp-l{color:var(--tri-run)}
 
-/* RUNNING DATA */
+/* ── RUNNING DATA ── */
 .rdata{display:flex;align-items:center;gap:2.5rem;margin-bottom:.875rem}
-.pace-blk{}
-.pace-lbl{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--running);margin-bottom:.1rem}
-.pace-val{font-family:'Barlow Semi Condensed',sans-serif;font-size:2.25rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
-.pace-unit{font-size:.8rem;font-weight:400;color:var(--muted);font-family:'Inter',sans-serif}
-.rstats{display:flex;gap:1.5rem}
+.pace-lbl{font-size:.58rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--running);margin-bottom:.1rem}
+.pace-val{font-family:'Barlow Semi Condensed',sans-serif;font-size:2.5rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
+.pace-unit{font-size:.79rem;font-weight:400;color:var(--muted);font-family:'Inter',sans-serif}
+.rstats{display:flex;gap:1.75rem}
 .rs{display:flex;flex-direction:column}
-.rs-l{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
-.rs-v{font-family:'Barlow Semi Condensed',sans-serif;font-size:.95rem;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+.rs-l{font-size:.58rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.rs-v{font-family:'Barlow Semi Condensed',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
 
-/* CARD FOOTER */
-.rcfoot{display:flex;gap:.3rem;flex-wrap:wrap;padding-top:.75rem;border-top:1px solid var(--border);margin-top:.25rem}
+/* ── CARD FOOTER ── */
+.rcfoot{
+  display:flex;gap:.3rem;flex-wrap:wrap;
+  padding-top:.875rem;border-top:1px solid var(--border);margin-top:.125rem;
+}
 
-/* FOOTER */
-footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem;text-align:center}
-.ft-nm{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.3rem}
-.ft-nm em{color:var(--blue);font-style:normal}
-.ft-tag{font-size:.82rem;color:var(--muted)}
+/* ── PAGE FOOTER ── */
+footer{
+  background:var(--navy);
+  padding:3rem 2.5rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+footer::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 80% at 20% 50%, rgba(34,87,212,.12) 0%, transparent 60%);
+}
+.ft-flag{
+  display:flex;width:28px;height:19px;
+  border-radius:3px;overflow:hidden;
+  margin:0 auto 1.25rem;
+  box-shadow:0 2px 8px rgba(0,0,0,.4);
+}
+.ft-flag span{flex:1;display:block}
+.ft-nm{
+  font-family:'Barlow Semi Condensed',sans-serif;
+  font-size:1.15rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:#fff;margin-bottom:.375rem;position:relative;
+}
+.ft-nm em{color:var(--blue-lt);font-style:normal}
+.ft-tag{font-size:.75rem;color:rgba(255,255,255,.35);letter-spacing:.14em;text-transform:uppercase;position:relative}
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media(max-width:820px){
-  nav{padding:0 1.5rem}
+  nav{padding:0 1.25rem;top:4px}
   .nav-links{display:none}
-  .wrap{padding:0 1.5rem}
-  .hero{padding:3.5rem 1.5rem 3rem}
+  .wrap{padding:0 1.25rem}
+  .hero{padding:4rem 1.25rem 3.5rem}
   .hero-inner{grid-template-columns:1fr;gap:2rem;align-items:start}
-  .pr-box{text-align:left;display:flex;align-items:center;gap:1.25rem;padding:1.25rem 1.5rem;min-width:0}
-  .sbar-in{grid-template-columns:repeat(2,1fr);padding:1rem 1.5rem}
+  .pr-sidebar{flex-direction:row;gap:.5rem}
+  .pr-box{flex:1;min-width:0;padding:1rem 1rem;text-align:left}
+  .pr-val{font-size:1.6rem}
+  .sbar-in{grid-template-columns:repeat(2,1fr);padding:1rem 1.25rem}
   .sbi{border-right:none;border-bottom:1px solid var(--border)}
   .sbi:nth-child(odd){border-right:1px solid var(--border)}
   .sbi:last-child,.sbi:nth-last-child(2):nth-child(odd){border-bottom:none}
@@ -166,9 +328,19 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
   .rdata{flex-direction:column;align-items:flex-start;gap:.875rem}
   .sec{padding:2.75rem 0}
 }
+@media(prefers-reduced-motion:reduce){
+  .up-card,.rcard,.pr-box{transition:none}
+}
 </style>
 </head>
 <body>
+
+<!-- 🇧🇪 Belgian flag — 4px accent stripe -->
+<div class="be-topbar" aria-hidden="true">
+  <span style="background:var(--be-black)"></span>
+  <span style="background:var(--be-yellow)"></span>
+  <span style="background:var(--be-red)"></span>
+</div>
 
 <nav>
   <a class="nav-brand" href="#top">Brent <em>De Petter</em></a>
@@ -178,11 +350,19 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 <div id="top" class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-label">Triatleet &amp; Hardloper · Gent, België</div>
+      <div class="hero-eyebrow">
+        Triatleet &amp; Hardloper · Gent, België
+        <!-- 🇧🇪 Mini inline Belgian flag -->
+        <span class="be-flag-mini" aria-label="Belgische vlag" title="België">
+          <span style="background:var(--be-black)"></span>
+          <span style="background:var(--be-yellow)"></span>
+          <span style="background:var(--be-red)"></span>
+        </span>
+      </div>
       <h1>Brent<br>De Petter</h1>
       <div class="discs">
         <span class="disc sw"><span class="disc-dot"></span>Zwemmen</span>
@@ -192,25 +372,29 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
       </div>
       <p class="hero-sub">Wedstrijden, splits &amp; persoonlijke records</p>
     </div>
-    <div class="pr-box">
-      <div class="pr-lbl">PR 5km run</div>
-      <div class="pr-val">20:05</div>
-      <div class="pr-sub">Training</div>
-    </div>
-    <div class="pr-box">
-      <div class="pr-lbl">PR 10km run</div>
-      <div class="pr-val">48:18</div>
-      <div class="pr-sub">Training</div>
-    </div>
-    <div class="pr-box">
-      <div class="pr-lbl">PR Half-marathon</div>
-      <div class="pr-val">1:58:30</div>
-      <div class="pr-sub">Training</div>
+
+    <!-- PR boxes, stacked right -->
+    <div class="pr-sidebar">
+      <div class="pr-box">
+        <div class="pr-lbl">PR 5 km</div>
+        <div class="pr-val">20:05</div>
+        <div class="pr-sub">Training</div>
+      </div>
+      <div class="pr-box">
+        <div class="pr-lbl">PR 10 km</div>
+        <div class="pr-val">48:18</div>
+        <div class="pr-sub">Training</div>
+      </div>
+      <div class="pr-box">
+        <div class="pr-lbl">PR Halve Marathon</div>
+        <div class="pr-val">1:58:30</div>
+        <div class="pr-sub">Training</div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- STATS -->
+<!-- ── STATS BAR ── -->
 <div class="sbar">
   <div class="sbar-in">
     <div class="sbi"><div class="sbi-n">3</div><div class="sbi-l">Wedstrijden</div></div>
@@ -220,7 +404,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
   </div>
 </div>
 
-<!-- AANKOMENDE -->
+<!-- ── AANKOMENDE WEDSTRIJDEN ── -->
 <div class="wrap">
   <div class="sec" id="aankomende">
     <div class="sec-top">
@@ -229,18 +413,18 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
     </div>
     <div class="up-grid">
 
-      <div class="up-card t">
+      <div class="up-card r">
         <div class="up-day">20</div>
         <div class="up-mo">September 2026</div>
         <div class="up-nm">WALLS Great Half</div>
-        <div class="up-loc">📍 Antwerp, BE</div>
+        <div class="up-loc">📍 Antwerpen, BE</div>
         <div class="up-badges">
           <span class="b b-run">Loopwedstrijd</span>
-          <span class="b b-miles">21.1km</span>
+          <span class="b b-miles">21,1 km</span>
         </div>
       </div>
 
-      <div class="up-card r">
+      <div class="up-card t">
         <div class="up-day">6</div>
         <div class="up-mo">September 2027</div>
         <div class="up-nm">Half-Ironman</div>
@@ -257,7 +441,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
 
 <hr class="divider">
 
-<!-- RESULTATEN -->
+<!-- ── RESULTATEN ── -->
 <div class="wrap">
   <div class="sec" id="resultaten">
     <div class="sec-top">
@@ -266,7 +450,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
     </div>
     <div class="results">
 
-      <!-- TRIATLON: Evere -->
+      <!-- Ironmanneke Evere -->
       <div class="rcard t">
         <div class="rc-top">
           <div>
@@ -297,19 +481,19 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
             <div class="tr" style="flex:37"></div>
           </div>
           <div class="splits">
-            <div class="sp sw"><span class="sp-l">Swim</span><span class="sp-v">10:14</span></div>
+            <div class="sp sw"><span class="sp-l">Zwem</span><span class="sp-v">10:14</span></div>
             <div class="sp"><span class="sp-l">T1</span><span class="sp-v">1:19</span></div>
-            <div class="sp bk"><span class="sp-l">Bike</span><span class="sp-v">35:43</span></div>
+            <div class="sp bk"><span class="sp-l">Fiets</span><span class="sp-v">35:43</span></div>
             <div class="sp"><span class="sp-l">T2</span><span class="sp-v">0:54</span></div>
-            <div class="sp rn"><span class="sp-l">Run</span><span class="sp-v">24:17</span></div>
+            <div class="sp rn"><span class="sp-l">Loop</span><span class="sp-v">24:17</span></div>
           </div>
         </div>
         <div class="rcfoot">
-          <span class="b b-gold">1st of age group</span>
+          <span class="b b-gold">🥇 1e leeftijdscategorie</span>
         </div>
       </div>
 
-      <!-- LOPEN: Denderloop -->
+      <!-- Denderloop -->
       <div class="rcard r">
         <div class="rc-top">
           <div>
@@ -332,7 +516,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
           </div>
         </div>
         <div class="rdata">
-          <div class="pace-blk">
+          <div>
             <div class="pace-lbl">Gem. tempo</div>
             <div class="pace-val">4:07 <span class="pace-unit">/km</span></div>
           </div>
@@ -346,15 +530,15 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
         </div>
       </div>
 
-      <!-- Leonardo run -->
+      <!-- Leonardo Run -->
       <div class="rcard r">
         <div class="rc-top">
           <div>
             <div class="rc-badges">
               <span class="b b-run">Hardlopen</span>
-              <span class="b b-miles">7.5km</span>
+              <span class="b b-miles">7,5 km</span>
             </div>
-            <div class="rc-nm">Leonardo run</div>
+            <div class="rc-nm">Leonardo Run</div>
             <div class="rc-meta">
               <span>9 mei 2026</span>
               <span class="meta-dot"></span>
@@ -369,22 +553,32 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem
           </div>
         </div>
         <div class="rdata">
-          <div class="pace-blk">
+          <div>
             <div class="pace-lbl">Gem. tempo</div>
             <div class="pace-val">4:17 <span class="pace-unit">/km</span></div>
           </div>
           <div class="rstats">
-            <div class="rs"><span class="rs-l">Afstand</span><span class="rs-v">7.5 km</span></div>
+            <div class="rs"><span class="rs-l">Afstand</span><span class="rs-v">7,5 km</span></div>
             <div class="rs"><span class="rs-l">Stijging</span><span class="rs-v">31 m</span></div>
           </div>
         </div>
         <div class="rcfoot">
-           <span class="b b-top10">Top 10</span>
+          <span class="b b-top10">Top 10</span>
         </div>
       </div>
 
+    </div>
+  </div>
+</div>
 
+<!-- ── FOOTER ── -->
 <footer>
+  <!-- 🇧🇪 Belgian flag in footer -->
+  <div class="ft-flag" aria-hidden="true">
+    <span style="background:var(--be-black)"></span>
+    <span style="background:var(--be-yellow)"></span>
+    <span style="background:var(--be-red)"></span>
+  </div>
   <div class="ft-nm">Brent <em>De Petter</em></div>
   <div class="ft-tag">Swim · Bike · Run · Repeat</div>
 </footer>
