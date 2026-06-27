@@ -1,12 +1,525 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jan Vermeersch — Triatleet & Hardloper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F2F5FA;
+  --white:#FFFFFF;
+  --navy:#0C1730;
+  --blue:#2257D4;
+  --border:#DDE2EE;
+  --text:#0C1730;
+  --muted:#64748B;
+  --swim:#0284C7;
+  --bike:#C2770A;
+  --tri-run:#DC2626;
+  --running:#16803D;
+  --gold:#92600E;
+  --r:10px;
+  --sh: 0 1px 3px rgba(12,23,48,.06), 0 1px 2px rgba(12,23,48,.04);
+  --sh-hover: 0 4px 14px rgba(12,23,48,.10), 0 1px 4px rgba(12,23,48,.06);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:58px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--navy);text-decoration:none}
+.nav-brand em{color:var(--blue);font-style:normal}
+.nav-links{list-style:none;display:flex;gap:2rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.83rem;font-weight:500;letter-spacing:.02em;transition:color .15s}
+.nav-links a:hover{color:var(--navy)}
+
+/* HERO */
+.hero{background:var(--white);border-bottom:1px solid var(--border);padding:4.5rem 2.5rem 3.5rem}
+.hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:end}
+.hero-label{font-size:.67rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem}
+.hero h1{font-family:'Barlow Semi Condensed',sans-serif;font-size:clamp(3.5rem,6vw,5.5rem);font-weight:700;line-height:.95;text-transform:uppercase;letter-spacing:.02em;color:var(--navy);margin-bottom:1.1rem}
+.hero-sub{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
+.discs{display:flex;align-items:center;gap:.625rem;flex-wrap:wrap}
+.disc{display:inline-flex;align-items:center;gap:.375rem;font-size:.73rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.275rem .65rem;border-radius:100px;border:1.5px solid}
+.disc.sw{border-color:rgba(2,132,199,.25);color:var(--swim);background:rgba(2,132,199,.05)}
+.disc.bk{border-color:rgba(194,119,10,.25);color:var(--bike);background:rgba(194,119,10,.05)}
+.disc.rn{border-color:rgba(220,38,38,.25);color:var(--tri-run);background:rgba(220,38,38,.05)}
+.disc.go{border-color:rgba(22,128,61,.25);color:var(--running);background:rgba(22,128,61,.05)}
+.disc-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.pr-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem 1.875rem;text-align:center;min-width:165px;flex-shrink:0}
+.pr-lbl{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:.35rem}
+.pr-val{font-family:'Barlow Semi Condensed',sans-serif;font-size:2.75rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
+.pr-sub{font-size:.73rem;color:var(--muted);margin-top:.35rem}
+
+/* STATS BAR */
+.sbar{background:var(--white);border-bottom:1px solid var(--border)}
+.sbar-in{max-width:1080px;margin:0 auto;padding:1.125rem 2.5rem;display:grid;grid-template-columns:repeat(4,1fr)}
+.sbi{text-align:center;padding:.375rem 1rem;border-right:1px solid var(--border)}
+.sbi:last-child{border-right:none}
+.sbi-n{font-family:'Barlow Semi Condensed',sans-serif;font-size:2rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
+.sbi-l{font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.2rem}
+
+/* WRAP + SECTIONS */
+.wrap{max-width:1080px;margin:0 auto;padding:0 2.5rem}
+.sec{padding:3.25rem 0}
+.sec-top{margin-bottom:1.5rem}
+.sec-eye{font-size:.63rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:.3rem}
+.sec-h2{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.45rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--navy)}
+.divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* UPCOMING */
+.up-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.875rem}
+.up-card{background:var(--white);border:1px solid var(--border);border-top-width:3px;border-radius:var(--r);padding:1.375rem 1.5rem;box-shadow:var(--sh);transition:box-shadow .2s,transform .2s}
+.up-card:hover{box-shadow:var(--sh-hover);transform:translateY(-2px)}
+.up-card.t{border-top-color:var(--blue)}
+.up-card.r{border-top-color:var(--running)}
+.up-day{font-family:'Barlow Semi Condensed',sans-serif;font-size:2.25rem;font-weight:700;line-height:1;color:var(--navy)}
+.up-mo{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.875rem}
+.up-nm{font-family:'Barlow Semi Condensed',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--navy);margin-bottom:.2rem}
+.up-loc{font-size:.82rem;color:var(--muted);margin-bottom:.875rem}
+.up-badges{display:flex;gap:.3rem;flex-wrap:wrap}
+
+/* BADGES */
+.b{display:inline-flex;align-items:center;padding:.2rem .5rem;border-radius:4px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+.b-sprint{background:rgba(2,132,199,.1);color:#0369A1}
+.b-olympic{background:rgba(34,87,212,.1);color:#1D4ED8}
+.b-703{background:rgba(124,58,237,.1);color:#6D28D9}
+.b-full{background:rgba(220,38,38,.1);color:#B91C1C}
+.b-tri{background:rgba(34,87,212,.1);color:#1D4ED8}
+.b-run{background:rgba(22,128,61,.1);color:#15803D}
+.b-5k,.b-10k,.b-half,.b-mara,.b-miles{background:rgba(22,128,61,.08);color:#15803D}
+.b-gold{background:rgba(161,121,0,.12);color:var(--gold)}
+.b-top10{background:rgba(34,87,212,.1);color:#1D4ED8}
+.b-fin{background:rgba(100,116,139,.1);color:var(--muted)}
+
+/* RESULT CARDS */
+.results{display:flex;flex-direction:column;gap:.75rem}
+.rcard{background:var(--white);border:1px solid var(--border);border-left-width:3px;border-radius:var(--r);padding:1.375rem 1.5rem;box-shadow:var(--sh);transition:box-shadow .15s}
+.rcard:hover{box-shadow:var(--sh-hover)}
+.rcard.t{border-left-color:var(--blue)}
+.rcard.r{border-left-color:var(--running)}
+
+.rc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1.25rem;margin-bottom:.875rem}
+.rc-badges{display:flex;gap:.3rem;margin-bottom:.45rem;flex-wrap:wrap}
+.rc-nm{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);margin-bottom:.25rem}
+.rc-meta{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.375rem;flex-wrap:wrap}
+.meta-dot{width:3px;height:3px;background:var(--border);border-radius:50%;flex-shrink:0}
+.rc-res{text-align:right;flex-shrink:0}
+.rc-pos{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.75rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
+.rc-pos.g{color:var(--gold)}
+.rc-time{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;margin-top:.1rem}
+
+/* SPLITS TAPE (triathlon) */
+.tape{margin-bottom:.875rem}
+.tape-bar{display:flex;height:4px;border-radius:2px;overflow:hidden;gap:2px;margin-bottom:.55rem}
+.ts{background:var(--swim)}
+.tt{background:var(--border)}
+.tb{background:var(--bike)}
+.tr{background:var(--tri-run)}
+.splits{display:flex;gap:1.25rem;flex-wrap:wrap}
+.sp{display:flex;flex-direction:column}
+.sp-l{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.sp-v{font-family:'Barlow Semi Condensed',sans-serif;font-size:.95rem;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+.sp.sw .sp-l{color:var(--swim)}
+.sp.bk .sp-l{color:var(--bike)}
+.sp.rn .sp-l{color:var(--tri-run)}
+
+/* RUNNING DATA */
+.rdata{display:flex;align-items:center;gap:2.5rem;margin-bottom:.875rem}
+.pace-blk{}
+.pace-lbl{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--running);margin-bottom:.1rem}
+.pace-val{font-family:'Barlow Semi Condensed',sans-serif;font-size:2.25rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
+.pace-unit{font-size:.8rem;font-weight:400;color:var(--muted);font-family:'Inter',sans-serif}
+.rstats{display:flex;gap:1.5rem}
+.rs{display:flex;flex-direction:column}
+.rs-l{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.rs-v{font-family:'Barlow Semi Condensed',sans-serif;font-size:.95rem;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+
+/* CARD FOOTER */
+.rcfoot{display:flex;gap:.3rem;flex-wrap:wrap;padding-top:.75rem;border-top:1px solid var(--border);margin-top:.25rem}
+
+/* FOOTER */
+footer{background:var(--white);border-top:1px solid var(--border);padding:2.5rem;text-align:center}
+.ft-nm{font-family:'Barlow Semi Condensed',sans-serif;font-size:1.05rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin-bottom:.3rem}
+.ft-nm em{color:var(--blue);font-style:normal}
+.ft-tag{font-size:.82rem;color:var(--muted)}
+
+/* RESPONSIVE */
+@media(max-width:820px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .wrap{padding:0 1.5rem}
+  .hero{padding:3.5rem 1.5rem 3rem}
+  .hero-inner{grid-template-columns:1fr;gap:2rem;align-items:start}
+  .pr-box{text-align:left;display:flex;align-items:center;gap:1.25rem;padding:1.25rem 1.5rem;min-width:0}
+  .sbar-in{grid-template-columns:repeat(2,1fr);padding:1rem 1.5rem}
+  .sbi{border-right:none;border-bottom:1px solid var(--border)}
+  .sbi:nth-child(odd){border-right:1px solid var(--border)}
+  .sbi:last-child,.sbi:nth-last-child(2):nth-child(odd){border-bottom:none}
+  .up-grid{grid-template-columns:1fr}
+  .rc-top{flex-direction:column-reverse;gap:.5rem}
+  .rc-res{text-align:left;display:flex;align-items:baseline;gap:.75rem}
+  .rdata{flex-direction:column;align-items:flex-start;gap:.875rem}
+  .sec{padding:2.75rem 0}
+}
+</style>
 </head>
 <body>
-  <h1>Hello World!</h1>
-  <p>Dit is mijn eerste HTML‑pagina.</p>
+
+<nav>
+  <a class="nav-brand" href="#top">Jan <em>Vermeersch</em></a>
+  <ul class="nav-links">
+    <li><a href="#aankomende">Aankomende</a></li>
+    <li><a href="#resultaten">Resultaten</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="top" class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label">Triatleet &amp; Hardloper · Gent, België</div>
+      <h1>Jan<br>Vermeersch</h1>
+      <p class="hero-sub">Wedstrijden, splits &amp; persoonlijke records</p>
+      <div class="discs">
+        <span class="disc sw"><span class="disc-dot"></span>Zwemmen</span>
+        <span class="disc bk"><span class="disc-dot"></span>Fietsen</span>
+        <span class="disc rn"><span class="disc-dot"></span>Lopen (tri)</span>
+        <span class="disc go"><span class="disc-dot"></span>Hardlopen</span>
+      </div>
+    </div>
+    <div class="pr-box">
+      <div class="pr-lbl">PR Ironman 70.3</div>
+      <div class="pr-val">4:47:22</div>
+      <div class="pr-sub">Aix-en-Provence 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="sbar">
+  <div class="sbar-in">
+    <div class="sbi"><div class="sbi-n">28</div><div class="sbi-l">Wedstrijden</div></div>
+    <div class="sbi"><div class="sbi-n">3</div><div class="sbi-l">Podiums</div></div>
+    <div class="sbi"><div class="sbi-n">14</div><div class="sbi-l">Top 10</div></div>
+    <div class="sbi"><div class="sbi-n">2023</div><div class="sbi-l">Actief Sinds</div></div>
+  </div>
+</div>
+
+<!-- AANKOMENDE -->
+<div class="wrap">
+  <div class="sec" id="aankomende">
+    <div class="sec-top">
+      <div class="sec-eye">Agenda 2025</div>
+      <h2 class="sec-h2">Aankomende Wedstrijden</h2>
+    </div>
+    <div class="up-grid">
+
+      <div class="up-card t">
+        <div class="up-day">12</div>
+        <div class="up-mo">Juli 2025</div>
+        <div class="up-nm">Challenge Knokke-Heist</div>
+        <div class="up-loc">📍 Knokke-Heist, BE</div>
+        <div class="up-badges">
+          <span class="b b-tri">Triatlon</span>
+          <span class="b b-703">70.3</span>
+        </div>
+      </div>
+
+      <div class="up-card r">
+        <div class="up-day">27</div>
+        <div class="up-mo">Juli 2025</div>
+        <div class="up-nm">Gent 10 Miles</div>
+        <div class="up-loc">📍 Gent, BE</div>
+        <div class="up-badges">
+          <span class="b b-run">Hardlopen</span>
+          <span class="b b-miles">10 Mijl</span>
+        </div>
+      </div>
+
+      <div class="up-card t">
+        <div class="up-day">21</div>
+        <div class="up-mo">September 2025</div>
+        <div class="up-nm">Triatlon Gent</div>
+        <div class="up-loc">📍 Gent, BE</div>
+        <div class="up-badges">
+          <span class="b b-tri">Triatlon</span>
+          <span class="b b-olympic">Olympisch</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- RESULTATEN -->
+<div class="wrap">
+  <div class="sec" id="resultaten">
+    <div class="sec-top">
+      <div class="sec-eye">Seizoen 2025</div>
+      <h2 class="sec-h2">Resultaten</h2>
+    </div>
+    <div class="results">
+
+      <!-- TRIATLON: Brugge -->
+      <div class="rcard t">
+        <div class="rc-top">
+          <div>
+            <div class="rc-badges">
+              <span class="b b-tri">Triatlon</span>
+              <span class="b b-olympic">Olympisch</span>
+            </div>
+            <div class="rc-nm">Triatlon Brugge</div>
+            <div class="rc-meta">
+              <span>15 jun 2025</span>
+              <span class="meta-dot"></span>
+              <span>Brugge, BE</span>
+              <span class="meta-dot"></span>
+              <span>Mannen 30–34</span>
+            </div>
+          </div>
+          <div class="rc-res">
+            <div class="rc-pos g">2e</div>
+            <div class="rc-time">Eindtijd 1:58:34</div>
+          </div>
+        </div>
+        <div class="tape">
+          <div class="tape-bar">
+            <div class="ts" style="flex:19"></div>
+            <div class="tt" style="flex:2"></div>
+            <div class="tb" style="flex:60"></div>
+            <div class="tt" style="flex:1"></div>
+            <div class="tr" style="flex:37"></div>
+          </div>
+          <div class="splits">
+            <div class="sp sw"><span class="sp-l">Swim</span><span class="sp-v">19:12</span></div>
+            <div class="sp"><span class="sp-l">T1</span><span class="sp-v">1:45</span></div>
+            <div class="sp bk"><span class="sp-l">Bike</span><span class="sp-v">59:48</span></div>
+            <div class="sp"><span class="sp-l">T2</span><span class="sp-v">0:52</span></div>
+            <div class="sp rn"><span class="sp-l">Run</span><span class="sp-v">36:57</span></div>
+          </div>
+        </div>
+        <div class="rcfoot">
+          <span class="b b-gold">🥈 Podium</span>
+        </div>
+      </div>
+
+      <!-- LOPEN: Brussels Canal Run -->
+      <div class="rcard r">
+        <div class="rc-top">
+          <div>
+            <div class="rc-badges">
+              <span class="b b-run">Hardlopen</span>
+              <span class="b b-10k">10 km</span>
+            </div>
+            <div class="rc-nm">Brussels Canal Run</div>
+            <div class="rc-meta">
+              <span>01 jun 2025</span>
+              <span class="meta-dot"></span>
+              <span>Brussel, BE</span>
+              <span class="meta-dot"></span>
+              <span>Mannen 30–34</span>
+            </div>
+          </div>
+          <div class="rc-res">
+            <div class="rc-pos">4e</div>
+            <div class="rc-time">Eindtijd 37:28</div>
+          </div>
+        </div>
+        <div class="rdata">
+          <div class="pace-blk">
+            <div class="pace-lbl">Gem. tempo</div>
+            <div class="pace-val">3:44 <span class="pace-unit">/km</span></div>
+          </div>
+          <div class="rstats">
+            <div class="rs"><span class="rs-l">Afstand</span><span class="rs-v">10,0 km</span></div>
+            <div class="rs"><span class="rs-l">5 km split</span><span class="rs-v">18:41</span></div>
+            <div class="rs"><span class="rs-l">Stijging</span><span class="rs-v">22 m</span></div>
+          </div>
+        </div>
+        <div class="rcfoot">
+          <span class="b b-top10">Top 10</span>
+        </div>
+      </div>
+
+      <!-- TRIATLON: Sprint Aalst -->
+      <div class="rcard t">
+        <div class="rc-top">
+          <div>
+            <div class="rc-badges">
+              <span class="b b-tri">Triatlon</span>
+              <span class="b b-sprint">Sprint</span>
+            </div>
+            <div class="rc-nm">Sprint Triatlon Aalst</div>
+            <div class="rc-meta">
+              <span>04 mei 2025</span>
+              <span class="meta-dot"></span>
+              <span>Aalst, BE</span>
+              <span class="meta-dot"></span>
+              <span>Mannen 30–34</span>
+            </div>
+          </div>
+          <div class="rc-res">
+            <div class="rc-pos">7e</div>
+            <div class="rc-time">Eindtijd 59:14</div>
+          </div>
+        </div>
+        <div class="tape">
+          <div class="tape-bar">
+            <div class="ts" style="flex:10"></div>
+            <div class="tt" style="flex:1"></div>
+            <div class="tb" style="flex:32"></div>
+            <div class="tt" style="flex:1"></div>
+            <div class="tr" style="flex:15"></div>
+          </div>
+          <div class="splits">
+            <div class="sp sw"><span class="sp-l">Swim</span><span class="sp-v">10:22</span></div>
+            <div class="sp"><span class="sp-l">T1</span><span class="sp-v">0:58</span></div>
+            <div class="sp bk"><span class="sp-l">Bike</span><span class="sp-v">31:55</span></div>
+            <div class="sp"><span class="sp-l">T2</span><span class="sp-v">0:44</span></div>
+            <div class="sp rn"><span class="sp-l">Run</span><span class="sp-v">15:15</span></div>
+          </div>
+        </div>
+        <div class="rcfoot">
+          <span class="b b-top10">Top 10</span>
+        </div>
+      </div>
+
+      <!-- LOPEN: Antwerp 10 Miles -->
+      <div class="rcard r">
+        <div class="rc-top">
+          <div>
+            <div class="rc-badges">
+              <span class="b b-run">Hardlopen</span>
+              <span class="b b-miles">10 Mijl</span>
+            </div>
+            <div class="rc-nm">Antwerp 10 Miles</div>
+            <div class="rc-meta">
+              <span>13 apr 2025</span>
+              <span class="meta-dot"></span>
+              <span>Antwerpen, BE</span>
+              <span class="meta-dot"></span>
+              <span>Mannen 30–34</span>
+            </div>
+          </div>
+          <div class="rc-res">
+            <div class="rc-pos">23e</div>
+            <div class="rc-time">Eindtijd 59:47</div>
+          </div>
+        </div>
+        <div class="rdata">
+          <div class="pace-blk">
+            <div class="pace-lbl">Gem. tempo</div>
+            <div class="pace-val">3:43 <span class="pace-unit">/km</span></div>
+          </div>
+          <div class="rstats">
+            <div class="rs"><span class="rs-l">Afstand</span><span class="rs-v">16,1 km</span></div>
+            <div class="rs"><span class="rs-l">5 km split</span><span class="rs-v">18:22</span></div>
+            <div class="rs"><span class="rs-l">Stijging</span><span class="rs-v">48 m</span></div>
+          </div>
+        </div>
+        <div class="rcfoot">
+          <span class="b b-fin">Finisher</span>
+          <span class="b b-fin">PR ⚡</span>
+        </div>
+      </div>
+
+      <!-- TRIATLON: Ironman 70.3 Aix -->
+      <div class="rcard t">
+        <div class="rc-top">
+          <div>
+            <div class="rc-badges">
+              <span class="b b-tri">Triatlon</span>
+              <span class="b b-703">Ironman 70.3</span>
+            </div>
+            <div class="rc-nm">Ironman 70.3 Pays d'Aix</div>
+            <div class="rc-meta">
+              <span>13 apr 2025</span>
+              <span class="meta-dot"></span>
+              <span>Aix-en-Provence, FR</span>
+              <span class="meta-dot"></span>
+              <span>Mannen 30–34</span>
+            </div>
+          </div>
+          <div class="rc-res">
+            <div class="rc-pos">34e</div>
+            <div class="rc-time">Eindtijd 4:47:22</div>
+          </div>
+        </div>
+        <div class="tape">
+          <div class="tape-bar">
+            <div class="ts" style="flex:33"></div>
+            <div class="tt" style="flex:3"></div>
+            <div class="tb" style="flex:148"></div>
+            <div class="tt" style="flex:2"></div>
+            <div class="tr" style="flex:101"></div>
+          </div>
+          <div class="splits">
+            <div class="sp sw"><span class="sp-l">Swim</span><span class="sp-v">33:14</span></div>
+            <div class="sp"><span class="sp-l">T1</span><span class="sp-v">2:51</span></div>
+            <div class="sp bk"><span class="sp-l">Bike</span><span class="sp-v">2:28:07</span></div>
+            <div class="sp"><span class="sp-l">T2</span><span class="sp-v">1:58</span></div>
+            <div class="sp rn"><span class="sp-l">Run</span><span class="sp-v">1:41:12</span></div>
+          </div>
+        </div>
+        <div class="rcfoot">
+          <span class="b b-fin">Finisher</span>
+          <span class="b b-fin">PR ⚡</span>
+        </div>
+      </div>
+
+      <!-- LOPEN: Ronde van Gent -->
+      <div class="rcard r">
+        <div class="rc-top">
+          <div>
+            <div class="rc-badges">
+              <span class="b b-run">Hardlopen</span>
+              <span class="b b-half">Halve Marathon</span>
+            </div>
+            <div class="rc-nm">Ronde van Gent</div>
+            <div class="rc-meta">
+              <span>02 mrt 2025</span>
+              <span class="meta-dot"></span>
+              <span>Gent, BE</span>
+              <span class="meta-dot"></span>
+              <span>Mannen 30–34</span>
+            </div>
+          </div>
+          <div class="rc-res">
+            <div class="rc-pos g">3e</div>
+            <div class="rc-time">Eindtijd 1:19:54</div>
+          </div>
+        </div>
+        <div class="rdata">
+          <div class="pace-blk">
+            <div class="pace-lbl">Gem. tempo</div>
+            <div class="pace-val">3:47 <span class="pace-unit">/km</span></div>
+          </div>
+          <div class="rstats">
+            <div class="rs"><span class="rs-l">Afstand</span><span class="rs-v">21,1 km</span></div>
+            <div class="rs"><span class="rs-l">10 km split</span><span class="rs-v">37:52</span></div>
+            <div class="rs"><span class="rs-l">Stijging</span><span class="rs-v">64 m</span></div>
+          </div>
+        </div>
+        <div class="rcfoot">
+          <span class="b b-gold">🥉 Podium</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-nm">Jan <em>Vermeersch</em></div>
+  <div class="ft-tag">Swim · Bike · Run · Repeat</div>
+</footer>
+
 </body>
 </html>
